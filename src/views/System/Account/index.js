@@ -11,27 +11,17 @@ export const tableOptions = [
     width: 180,
   },
   {
-    prop: 'parentName',
-    label: '父节点',
-  },
-  {
-    prop: 'tenantName',
-    label: '所属商户',
+    prop: 'accountType',
+    label: '账号类型',
     width: 180,
   },
-  {
-    prop: 'departmentTitle',
-    label: '部门',
-    width: 180,
-  },
+  // {
+  //   prop: 'parentName',
+  //   label: '父节点',
+  // },
   {
     prop: 'status',
     label: '状态',
-  },
-  {
-    prop: 'sort',
-    label: '排序',
-    align: 'center',
   },
   {
     prop: 'createdAt',

@@ -85,7 +85,6 @@
 
   const formData = ref({
     name: '',
-    sort: 1,
     description: '',
   });
   const isVisibleDialog = ref(false);
@@ -96,7 +95,6 @@
     multipleSelection.value = [];
     formData.value = {
       name: null,
-      sort: null,
       description: null,
     };
   };
@@ -108,7 +106,6 @@
       title.value = '编辑账号';
       formData.value = {
         name: rowData.name,
-        sort: rowData.sort,
         description: rowData.description,
       };
       isVisibleDialog.value = true;
@@ -130,7 +127,6 @@
     initTableData();
     formData.value = {
       name: null,
-      sort: null,
       description: null,
     };
   };

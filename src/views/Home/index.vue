@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="home">
     <div class="box">
       {{ value }}==
       <TreeSelect v-model="value" :options="options" placeholder="请选择" isMultiple />
@@ -51,44 +51,4 @@
   ]);
   const value = ref(['1']);
 </script>
-<style scoped lang="scss">
-  .box {
-    width: 200px;
-    height: 30px;
-
-    :deep(.vue-treeselect__placeholder) {
-      line-height: 30px !important;
-      font-size: 14px;
-      padding-left: 10px;
-    }
-
-    :deep(.vue-treeselect__control) {
-      height: 30px;
-      padding-left: 0;
-      padding-right: 0;
-      border-radius: 3px;
-    }
-
-    :deep(.vue-treeselect__single-value) {
-      line-height: 28px;
-      font-size: 14px;
-      padding-left: 10px;
-    }
-
-    :deep(.vue-treeselect__multi-value) {
-      height: 28px;
-      margin-bottom: 0px;
-      margin-left: 10px;
-      white-space: nowrap;
-      /* 禁止换行 */
-      overflow: hidden;
-      /* 超出部分隐藏 */
-      text-overflow: ellipsis;
-      /* 使用省略号显示超出部分 */
-    }
-
-    :deep(.vue-treeselect__multi-value-item-container) {
-      padding-top: 3px;
-    }
-  }
-</style>
+<style scoped lang="scss"></style>

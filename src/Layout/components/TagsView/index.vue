@@ -22,7 +22,6 @@
   // 添加到状态机种
   const addTags = () => {
     if (route.path) {
-      console.log(route.path, ': 添加到tagsView中');
       tagsViewStore.addView(route);
     }
   };

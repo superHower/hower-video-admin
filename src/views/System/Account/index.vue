@@ -60,7 +60,6 @@
   import { getTreeList, isShowBtn } from '@/utils';
 
   const route = useRoute();
-  console.log(route.query.tenantId, '???');
   const tableData = ref([]);
   const pageTotal = ref(0);
   // 搜索
@@ -79,7 +78,13 @@
     const {
       result: { data, total },
     } = await AccountService.getPageApi({ ...queryOption, tenantId: route.query.tenantId });
-    tableData.value = data;
+    console.log('输出', data);
+
+    tableData.value = data.map((v) => ({
+      ...v,
+      accountType:
+        v.accountType === 2 ? '超级管理员' : v.accountType === 1 ? '会员用户' : '普通用户',
+    }));
     pageTotal.value = total;
     multipleSelection.value = [];
   };
@@ -92,7 +97,7 @@
 
   const formData = ref({
     username: '',
-    sort: 1,
+    accountType: 0,
   });
   const isVisibleDialog = ref(false);
   const title = ref('');
@@ -103,7 +108,7 @@
     isVisibleDialog.value = true;
     formData.value = {
       username: null,
-      sort: null,
+      accountType: null,
     };
   };
 
@@ -182,12 +187,6 @@
   const initDepartment = async () => {
     const { result } = await DepartmentService.getListApi();
     const list = [
-      {
-        id: -1,
-        value: -1,
-        label: '顶级部门',
-        parentId: 0,
-      },
       ...result.map((item) => {
         return {
           ...item,
@@ -206,34 +205,22 @@
       required: true,
     },
     {
-      type: 'treeSelect',
-      label: '父节点',
-      prop: 'parentId',
-      data: parentList,
-      attrs: {
-        style: {
-          width: '100%',
-        },
-        clearable: true,
-      },
+      type: 'input',
+      label: '账号类型',
+      prop: 'accountType',
     },
-    {
-      type: 'treeSelect',
-      label: '部门',
-      prop: 'departmentId',
-      data: departmentList,
-      attrs: {
-        style: {
-          width: '100%',
-        },
-        clearable: true,
-      },
-    },
-    {
-      type: 'number',
-      label: '排序',
-      prop: 'sort',
-    },
+    // {
+    //   type: 'treeSelect',
+    //   label: '父节点',
+    //   prop: 'parentId',
+    //   data: parentList,
+    //   attrs: {
+    //     style: {
+    //       width: '100%',
+    //     },
+    //     clearable: true,
+    //   },
+    // },
   ]);
 
   // 分配角色

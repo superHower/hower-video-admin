@@ -35,13 +35,13 @@ export const useAppStore = defineStore('app', {
       const { result } = await MenusService.getAllMenusApi();
       console.log(result, '全部的菜单');
       this.authMenusList = result;
-      this.menusTreeList = getTreeList(result, 'id', 'parentId');
+      this.menusTreeList = getTreeList(this.authMenusList, 'id', 'parentId');
     },
     // 根据当前路由获取接口权限
     async getBtnApi(url) {
-      console.log('getBtnApi', url);
       const { result } = await MenusService.getAllBtnByMenusUrlApi(url);
       this.authBtnList = result;
+      console.log('当前路由：', url, '的权限：', result);
     },
     clearGlobalToken() {
       this.globalToken = null;

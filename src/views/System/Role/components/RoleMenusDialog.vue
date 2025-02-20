@@ -12,9 +12,6 @@
           <el-form-item label="角色名称">
             <el-input v-model="roleForm.name" disabled></el-input>
           </el-form-item>
-          <el-form-item label="所属集团">
-            <el-input v-model="roleForm.tenantName" disabled></el-input>
-          </el-form-item>
           <!-- 展示全部的菜单树 -->
           <el-form-item label="菜单权限">
             <el-tree

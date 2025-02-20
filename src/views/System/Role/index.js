@@ -11,11 +11,6 @@ export const tableOptions = [
     width: 180,
   },
   {
-    prop: 'tenantName',
-    label: '所属商户',
-    width: 180,
-  },
-  {
     prop: 'accountUsername',
     label: '所属账号',
     width: 180,
@@ -30,11 +25,6 @@ export const tableOptions = [
     label: '状态',
   },
   {
-    prop: 'sort',
-    label: '排序',
-    align: 'center',
-  },
-  {
     prop: 'createdAt',
     label: '创建时间',
     align: 'center',
@@ -46,13 +36,6 @@ export const tableOptions = [
     align: 'center',
     width: 180,
   },
-  // {
-  //   label: '操作',
-  //   action: true,
-  //   align: 'center',
-  //   width: 300,
-  //   fixed: 'right',
-  // },
 ];
 export const queryFormOption = [
   {

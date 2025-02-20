@@ -12,9 +12,6 @@
           <el-form-item label="用户名">
             <el-input v-model="formData.username" disabled></el-input>
           </el-form-item>
-          <el-form-item label="所属集团">
-            <el-input v-model="formData.tenantName" disabled></el-input>
-          </el-form-item>
           <!-- 展示全部的角色 -->
           <el-form-item label="角色">
             <el-checkbox-group v-model="formData.roleIdList">

@@ -62,7 +62,6 @@ router.beforeEach(async (to, from, next) => {
       // 其他路径检查权限
       const authMenusUrlList = appStore.authMenusList.map((item) => item.url);
       if (authMenusUrlList.includes(to.path)) {
-        console.log('正常前往：', to.path);
         await appStore.getBtnApi(to.path);
         next();
       } else {
