@@ -1,33 +1,62 @@
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from 'node:url';
+import path from 'path';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import DefineOptions from 'unplugin-vue-define-options/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import qiankun from 'vite-plugin-qiankun';
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'node:path';
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import qiankun from "vite-plugin-qiankun";
-
-
-
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
-  base: "admin",
+  publicDir: 'static',
+  base: '/admin',
   server: {
-    headers: {
-      "Access-Control-Allow-Origin": "*"
-    },
     port: 3001,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     cors: true,
-    origin: 'http://localhost:3001'
+    origin: 'http://localhost:3001',
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: ['legacy-js-api'],
+        api: 'modern-compiler',
+      },
+    },
   },
   plugins: [
     vue(),
+    vueJsx(),
+    DefineOptions(),
+    // 导入svg的
+    createSvgIconsPlugin({
+      iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')], // icon存放的目录
+      symbolId: 'icon-[name]', // symbol的id
+      inject: 'body-last', // 插入的位置
+      customDomId: '__svg__icons__dom__', // svg的id
+    }),
     AutoImport({
+      imports: ['vue', 'vue-router'],
       resolvers: [ElementPlusResolver()],
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/,
+        /\.vue\?vue/, // .vue
+      ],
+      dts: 'src/auto-import.d.ts', // 生成的全局变量放到此目录下
+      eslintrc: { enabled: false }, // 改成true生成一次后禁用即可
     }),
     Components({
+      dirs: ['src/components', 'src/layout/components'], // 后面布局组件也有相关的组件期望自动导入
+      dts: 'src/components.d.ts',
       resolvers: [ElementPlusResolver()],
+      directoryAsNamespace: true,
     }),
     qiankun('admin', {
       // 微应用名字，与主应用注册的微应用名字保持一致
@@ -36,41 +65,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  build: {
-    outDir: "dist",
-    minify: "terser", // esbuild打包速度最快，terser打包体积最小。
-    // assetsInlineLimit: 4000, // 小于该值 图片将打包成Base64
-    terserOptions: {
-      compress: {
-        // warnings: false,
-        drop_console: true, //打包时删除console
-        drop_debugger: true, //打包时删除 debugger
-        pure_funcs: ["console.log"]
-      },
-      output: {
-        // 去掉注释内容
-        comments: true
-      }
-    },
-    reportCompressedSize: false, // 禁用 gzip 压缩大小报告，可略微减少打包时间
-    // 规定触发警告的 chunk 大小
-    chunkSizeWarningLimit: 2000,
-    rollupOptions: {
-      output: {
-        // js最小拆包
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            return id.toString().split("node_modules/")[1].split("/")[1].toString();
-          }
-        },
-        // 静态资源分类和包装
-        chunkFileNames: "assets/js/[name]-[hash].js",
-        entryFileNames: "assets/js/[name]-[hash].js",
-        assetFileNames: "assets/[ext]/[name]-[hash].[ext]"
-      }
-    }
-  }
-})
+});
