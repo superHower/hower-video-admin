@@ -24,6 +24,7 @@
               :data="item?.data"
               v-bind="item.attrs"
               v-model="model[item.prop]"
+              :disabled="item.disabled"
               v-if="!['upload', 'editor'].includes(item.type)"
               autocomplete="new-password"
               style="width: 100%"
@@ -76,6 +77,7 @@
                 :is="`el-${child.type}`"
                 :label="child.label"
                 :value="child.value"
+                :disabled="item.disabled"
                 style="width: 100%"
                 clearable
               ></component>

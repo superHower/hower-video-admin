@@ -8,3 +8,4 @@ export * from './modules/role.resources.service';
 export * from './modules/account.role.service';
 export * from './modules/menus.service';
 export * from './modules/department.service';
+export * from './modules/video.service';

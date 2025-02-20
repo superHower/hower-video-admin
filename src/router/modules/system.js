@@ -76,5 +76,14 @@ export default {
         icon: 'permission',
       },
     },
+    {
+      path: '/system/video',
+      name: 'video',
+      component: () => import('@/views/System/Video/index.vue'),
+      meta: {
+        title: '视频管理',
+        icon: 'video',
+      },
+    },
   ],
 };

@@ -102,7 +102,6 @@
   const isVisibleDialog = ref(false);
   const title = ref('');
   const addNewHandler = async () => {
-    await initAccountList();
     await initDepartment();
     title.value = '新增账号';
     isVisibleDialog.value = true;
@@ -115,7 +114,6 @@
   // 编辑
   const editRowHandler = async (rowData) => {
     if (multipleSelection.value.length == 1) {
-      await initAccountList();
       await initDepartment();
       const rowData = multipleSelection.value[0];
       title.value = '编辑账号';
@@ -166,21 +164,6 @@
     } else {
       ElMessage.warning('请选择行操作');
     }
-  };
-
-  // 初始化父节点下拉框
-  const parentList = ref([]);
-  const initAccountList = async () => {
-    const { result } = await AccountService.getListApi();
-    console.log(result);
-    const list = result.map((item) => {
-      return {
-        ...item,
-        value: item.id,
-        label: item.username,
-      };
-    });
-    parentList.value = getTreeList(list, 'id', 'parentId');
   };
 
   const departmentList = ref([]);
