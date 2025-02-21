@@ -14,8 +14,9 @@
       @selection-change="handleSelectionChange"
     >
       <template #tableHeader>
-        <el-button type="primary" @click="addNewHandler">新增</el-button>
+        <!-- <el-button type="primary" @click="addNewHandler">新增</el-button> -->
         <el-button type="primary" @click="editRowHandler">编辑</el-button>
+        <el-button type="primary" @click="commentHandler">审核评论</el-button>
         <el-button type="danger" @click="modifyStatusHandler">状态</el-button>
         <el-button type="danger" @click="deleteRowHandler">删除</el-button>
       </template>
@@ -27,6 +28,7 @@
       :formData="formData"
       @getFormData="getFormData"
     ></FormDialog>
+    <CommentDialog ref="commentDialogRef" @updateTable="initTableData"></CommentDialog>
   </div>
 </template>
 
@@ -34,7 +36,7 @@
   import { tableOptions, queryFormOption, formOption } from './index.js';
   import { VideoService, AccountService } from '@/services/index.js';
   import { useRoute } from 'vue-router';
-  import { getTreeList } from '@/utils';
+  import CommentDialog from './components/CommentDialog.vue';
 
   const route = useRoute();
 
@@ -113,7 +115,15 @@
       status: null,
     };
   };
-
+  // 审核评论
+  const commentDialogRef = ref();
+  const commentHandler = async () => {
+    if (multipleSelection.value.length) {
+      commentDialogRef.value.openDialog(multipleSelection.value[0]);
+    } else {
+      ElMessage.warning('请先选择行');
+    }
+  };
   // 修改状态
   const modifyStatusHandler = async () => {
     if (multipleSelection.value.length) {

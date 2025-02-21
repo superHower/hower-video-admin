@@ -19,4 +19,11 @@ export class VideoService extends BaseService {
   static async getPageApi(queryOption) {
     return BaseService.get('/admin/video', queryOption);
   }
+  // 评论
+  static async getCommentPageApi(queryOption) {
+    return BaseService.get('/admin/video/comment', queryOption);
+  }
+  static async batchDeleteCommentByIdListApi(postData) {
+    return BaseService.post('/admin/video/comment/delete', postData);
+  }
 }

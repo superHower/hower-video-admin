@@ -71,4 +71,7 @@ declare module 'vue' {
     TreeSelect: typeof import('./components/TreeSelect/index.vue')['default']
     TreeSelectSrc: typeof import('./components/TreeSelect/src/index.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

@@ -158,7 +158,6 @@
   // 分配角色菜单
   const roleMenusDialogRef = ref(null);
   const dispatchMenusHandler = () => {
-    console.log(multipleSelection.value.length, '??');
     if (multipleSelection.value.length == 1) {
       roleMenusDialogRef.value.openDialog(multipleSelection.value[0]);
     } else {
