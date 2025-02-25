@@ -17,11 +17,11 @@ export class VideoService extends BaseService {
     return BaseService.put(`/admin/video/${id}`, param);
   }
   static async getPageApi(queryOption) {
-    return BaseService.get('/admin/video', queryOption);
+    return BaseService.post('/admin/video/list', queryOption);
   }
   // 评论
   static async getCommentPageApi(queryOption) {
-    return BaseService.get('/admin/video/comment', queryOption);
+    return BaseService.post('/admin/video/comment/list', queryOption);
   }
   static async batchDeleteCommentByIdListApi(postData) {
     return BaseService.post('/admin/video/comment/delete', postData);
