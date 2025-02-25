@@ -13,7 +13,7 @@ import qiankun from 'vite-plugin-qiankun';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
-  const origin = isDev ? 'http://localhost:3001' : 'http://www.hower.tech:3001';
+  const origin = isDev ? 'http://localhost:3001' : 'http://118.31.32.184:3001';
 
   return {
     publicDir: 'static',

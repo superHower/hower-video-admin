@@ -9,7 +9,10 @@ import {
 import { fullLoading } from './fullLoading';
 import { useAppStore } from '@/stores/app';
 
-const prefix = import.meta.env.VITE_BASE_API;
+const prefix =
+  import.meta.env.MODE === 'development'
+    ? 'http://localhost:9000/api/v1'
+    : import.meta.env.VITE_BASE_API;
 console.log('当前环境地址', prefix);
 
 let theFullLoading = null;
