@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import { useAppStore } from '@/stores/app';
 import SystemRouter from './modules/system';
 import CouponRouter from './modules/coupon';
@@ -42,7 +42,7 @@ const constantRoutes = [
 
 export const routes = [...constantRoutes, ...asyncRoutes];
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
 });
 // 白名单

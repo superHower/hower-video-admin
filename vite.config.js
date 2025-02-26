@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     publicDir: 'static',
-    base: '/admin',
+    base: '/#admin/',
     server: {
       port: 3001,
       headers: {
